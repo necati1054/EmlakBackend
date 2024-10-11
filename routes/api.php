@@ -6,6 +6,7 @@ use App\Http\Controllers\ArsaController;
 use App\Http\Controllers\KonutController;
 use App\Http\Controllers\IsYeriController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SettingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -57,3 +58,7 @@ Route::post('konut', [KonutController::class, 'store']);
 Route::get('konut/{id}', [KonutController::class, 'show']);
 Route::post('konut/{id}', [KonutController::class, 'update']);
 Route::delete('konut/{id}', [KonutController::class, 'destroy']);
+
+//NOTE - SETTINGS ROUTES
+Route::get('settings', [SettingController::class, 'index']);
+Route::post('save-settings', [SettingController::class, 'store']);

@@ -29,7 +29,7 @@ class UserFactory extends Factory
             'name' => fake()->firstName,
             'surname' => fake()->lastName,
             'phone_number' => fake()->phoneNumber,
-            'email' => fake()->unique()->safeEmail,
+            'email' => fake()->unique()->freeEmail,
             'password' => Hash::make('password'), // Hashed password
             'role' => fake()->randomElement($roles), // Assign random role: 1, 2, or 3
             'is_active' => fake()->boolean(90), // 90% chance to be active

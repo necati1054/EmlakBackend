@@ -19,8 +19,8 @@ return new class extends Migration
             $table->decimal('fiyat', 15, 2); // Decimal (Fiyat için virgüllü değer)
             $table->enum('imar_durumu', ['ada', 'a-Lejantlı', 'arazi', 'bahçe', 'depo ', 'eğitim', 'enerji_depolama', 'konut', 'muhtelif', 'özel_kullanım', 'sağlık', 'sanayi', 'sera', 'sit_alanı', 'spor_alanı', 'tarla', 'ticari', 'toplu_konut', 'turizm', 'villa', 'zeytinlik']); // Enum (Seçenekli)
             $table->integer('m2'); // Integer
-            $table->string('ada_no'); // String
-            $table->string('parsel_no'); // String
+            $table->integer('ada_no'); // String
+            $table->integer('parsel_no'); // String
             $table->string('pafta_no')->nullable(); // String (Pafta numarası opsiyonel olabilir)
             $table->decimal('kaks', 5, 2)->nullable(); // Decimal (KAKS, koordine artış katsayısı), nullable olabilir
             $table->decimal('gabari', 5, 2)->nullable(); // Decimal (Gabari, yükseklik sınırı), nullable olabilir
