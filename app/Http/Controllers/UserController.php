@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Arsa;
+use App\Models\IsYeri;
+use App\Models\Konut;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -54,12 +57,28 @@ class userController extends Controller
         }
     }
 
-    public function deleteAccount(
-        $id,
-        Request $request
-    ) {
+    public function deleteAccount($id, Request $request)
+    {
         $user = User::where('id', $id)->first();
         $user->delete();
         return response()->json(['message' => 'User deleted successfully'], 200);
+    }
+
+    public function getUserIlans($userId)
+    {
+        $user = User::findOrFail($userId);
+
+        $ilans = $user->ilans()->with(['ilanable', 'ilanable.photos'])->get();
+
+        $groupedIlans = [
+            'arsa' => $ilans->where('ilanable_type', 'App\\Models\\Arsa')->values(),
+            'konut' => $ilans->where('ilanable_type', 'App\\Models\\Konut')->values(),
+            'is_yeri' => $ilans->where('ilanable_type', 'App\\Models\\IsYeri')->values(),
+        ];
+
+        return response()->json([
+            // 'user' => $user,
+            'ilans' => $groupedIlans,
+        ]);
     }
 }

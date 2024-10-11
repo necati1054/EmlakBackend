@@ -67,4 +67,10 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+
+    public function ilans()
+    {
+        return $this->hasMany(Ilan::class);
+    }
 }

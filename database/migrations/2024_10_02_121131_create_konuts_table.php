@@ -47,7 +47,9 @@ return new class extends Migration
             $table->string('Mahalle'); // String
             $table->decimal('lat', 10, 8); // Decimal (Koordinatlar için)
             $table->decimal('lng', 11, 8); // Decimal (Koordinatlar için)
+            $table->boolean('is_active')->default(true); // Boolean
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
