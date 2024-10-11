@@ -15,7 +15,7 @@ class KonutController extends Controller
      */
     public function index()
     {
-        $data = Konut::all()->load('photos');
+        $data = Konut::all()->load('photos', 'ilan.user');
         return $data;
     }
 
@@ -114,7 +114,7 @@ class KonutController extends Controller
             return  null;
         }
 
-        $konut->load('photos');
+        $konut->load('photos', 'ilan.user');
 
         return $konut;
     }

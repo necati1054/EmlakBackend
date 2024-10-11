@@ -26,7 +26,7 @@ class ArsaController extends Controller
      */
     public function index()
     {
-        $data = Arsa::all()->load('photos');
+        $data = Arsa::all()->load('photos', 'ilan.user');
         return $data;
     }
 
@@ -112,7 +112,7 @@ class ArsaController extends Controller
             return  null;
         }
 
-        $arsa->load('photos');
+        $arsa->load('photos', 'ilan.user');
 
         return $arsa;
     }

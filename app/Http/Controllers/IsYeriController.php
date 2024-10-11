@@ -27,7 +27,7 @@ class IsYeriController extends Controller
 
     public function index()
     {
-        $data = IsYeri::all()->load('photos');
+        $data = IsYeri::all()->load('photos', 'ilan.user');
         return $data;
     }
 
@@ -127,7 +127,7 @@ class IsYeriController extends Controller
             return  null;
         }
 
-        $isYeri->load('photos');
+        $isYeri->load('photos', 'ilan.user');
 
         return $isYeri;
     }
