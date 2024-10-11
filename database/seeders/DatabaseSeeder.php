@@ -23,5 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(IsYeriSeeder::class);
         $this->call(ArsaSeeder::class);
         $this->call(KonutSeeder::class);
+        $this->call(IlanSeeder::class);
     }
 }
