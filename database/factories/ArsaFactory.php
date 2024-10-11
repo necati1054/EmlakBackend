@@ -35,7 +35,7 @@ class ArsaFactory extends Factory
             'takaslı' => $this->faker->optional()->boolean,
             'İl' => $this->faker->city,
             'İlçe' => $this->faker->city,
-            'Mahalle' => $this->faker->word,
+            'Mahalle' => $this->faker->streetAddress,
             'lat' => $this->faker->latitude,
             'lng' => $this->faker->longitude,
             'is_active' => $this->faker->boolean(90), // %90 aktif olma ihtimali
