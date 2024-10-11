@@ -45,6 +45,7 @@ class Konut extends Model
         'Mahalle',
         'lat',
         'lng',
+        'is_active'
     ];
 
     public function photos()

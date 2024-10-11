@@ -32,6 +32,7 @@ class Arsa extends Model
         'Mahalle',
         'lat',
         'lng',
+        'is_active'
     ];
 
     public function photos()

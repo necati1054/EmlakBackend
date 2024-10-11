@@ -45,6 +45,7 @@ class IsYeri extends Model
         'Mahalle',
         'lat',
         'lng',
+        'is_active'
     ];
 
 

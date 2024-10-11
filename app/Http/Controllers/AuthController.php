@@ -34,6 +34,10 @@ class AuthController extends Controller
         $user = User::where('email', $request['email'])->first();
 
         $token = JWTAuth::claims(['user' => $user])->attempt($credentials);
+
+        if (!$user->is_active) {
+            return response()->json(['error' => 'account suspended', 'status' => 401], 401);
+        }
         if (!$token) {
             return response()->json(['error' => 'Unauthorized', 'status' => 401], 401);
         }
@@ -62,6 +66,7 @@ class AuthController extends Controller
             'surname' => $request->surname,
             'email' => $request->email,
             'role' => $request->role,
+            'phone_number' => $request->phone_number,
             'password' => bcrypt($request->password),
             'created_at' => now(),
         ]);
