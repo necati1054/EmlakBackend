@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\ArsaController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KonutController;
 use App\Http\Controllers\IsYeriController;
 use App\Http\Controllers\SearchController;
@@ -62,3 +63,7 @@ Route::delete('konut/{id}', [KonutController::class, 'destroy']);
 //NOTE - SETTINGS ROUTES
 Route::get('settings', [SettingController::class, 'index']);
 Route::post('save-settings', [SettingController::class, 'store']);
+
+//NOTE - Dashboard ROUTES
+Route::get('admin-dashboard', [DashboardController::class, 'adminDashboard']);
+Route::get('user-dashboard/{id}', [DashboardController::class, 'userDashboard']);
