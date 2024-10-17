@@ -35,12 +35,14 @@ class AuthController extends Controller
 
         $token = JWTAuth::claims(['user' => $user])->attempt($credentials);
 
-        if (!$user->is_active) {
-            return response()->json(['error' => 'account suspended', 'status' => 401], 401);
-        }
         if (!$token) {
             return response()->json(['error' => 'Unauthorized', 'status' => 401], 401);
         }
+
+        if (!$user->is_active) {
+            return response()->json(['error' => 'account suspended', 'status' => 401], 401);
+        }
+
 
         return $this->respondWithToken($token);
     }
