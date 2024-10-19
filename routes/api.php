@@ -45,6 +45,8 @@ Route::post('is_yeri', [IsYeriController::class, 'store']);
 Route::get('is_yeri/{id}', [IsYeriController::class, 'show']);
 Route::post('is_yeri/{id}', [IsYeriController::class, 'update']);
 Route::delete('is_yeri/{id}', [IsYeriController::class, 'destroy']);
+Route::put('is_yeri/{id}/ap', [IsYeriController::class, 'activePassive']);
+
 
 //NOTE - Arsa ROUTES
 Route::get('arsa', [ArsaController::class, 'index']);
@@ -52,6 +54,8 @@ Route::post('arsa', [ArsaController::class, 'store']);
 Route::get('arsa/{id}', [ArsaController::class, 'show']);
 Route::post('arsa/{id}', [ArsaController::class, 'update']);
 Route::delete('arsa/{id}', [ArsaController::class, 'destroy']);
+Route::put('arsa/{id}/ap', [ArsaController::class, 'activePassive']);
+
 
 //NOTE - Konut ROUTES
 Route::get('konut', [KonutController::class, 'index']);
@@ -59,6 +63,7 @@ Route::post('konut', [KonutController::class, 'store']);
 Route::get('konut/{id}', [KonutController::class, 'show']);
 Route::post('konut/{id}', [KonutController::class, 'update']);
 Route::delete('konut/{id}', [KonutController::class, 'destroy']);
+Route::put('konut/{id}/ap', [KonutController::class, 'activePassive']);
 
 //NOTE - SETTINGS ROUTES
 Route::get('settings', [SettingController::class, 'index']);

@@ -6,6 +6,7 @@ use App\Models\IsYeri;
 use App\Models\Photo;
 use App\Http\Controllers\Controller;
 use App\Models\Ilan;
+use Database\Seeders\IsYeriSeeder;
 use Illuminate\Http\Request;
 
 class IsYeriController extends Controller
@@ -34,9 +35,15 @@ class IsYeriController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function activePassive($id)
     {
-        //
+        $data = IsYeri::find($id);
+        $data->is_active = !$data->is_active;
+        $data->save();
+
+        return response()->json([
+            'message' => 'İlan Başarıyla Güncellendi'
+        ], 201);
     }
 
     /**

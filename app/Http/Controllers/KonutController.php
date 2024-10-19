@@ -22,9 +22,15 @@ class KonutController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function activePassive($id)
     {
-        //
+        $data = Konut::find($id);
+        $data->is_active = !$data->is_active;
+        $data->save();
+
+        return response()->json([
+            'message' => 'İlan Başarıyla Güncellendi'
+        ], 201);
     }
 
     /**
