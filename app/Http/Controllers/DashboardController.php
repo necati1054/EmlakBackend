@@ -70,6 +70,7 @@ class DashboardController extends Controller
 
     public function userDashboard($id)
     {
+        // fixme - silinen ilanlar geri gelmiyor
         $SystemUserid = JWTAuth::user()->id;
 
         if ($SystemUserid != $id) {
@@ -87,7 +88,7 @@ class DashboardController extends Controller
 
         // return $data;
 
-        $IsYerisData = Ilan::where('user_id', $id)
+        $IsYerisData = Ilan::withTrashed()->where('user_id', $id)
             ->where('ilanable_type', IsYeri::class)
             ->join('is_yeris', 'ilans.ilanable_id', '=', 'is_yeris.id')
             ->select('is_yeris.is_active', DB::raw('count(*) as count'))
@@ -111,7 +112,7 @@ class DashboardController extends Controller
         $data['IsYeriIlanCount'] = $resultKonut;
 
 
-        $ArsasData = Ilan::where('user_id', $id)
+        $ArsasData = Ilan::withTrashed()->where('user_id', $id)
             ->where('ilanable_type', Arsa::class) // Arsa modelini filtreliyoruz
             ->join('arsas', 'ilans.ilanable_id', '=', 'arsas.id') // 'arsas' tablosuna join yapıyoruz
             ->select('arsas.is_active', DB::raw('count(*) as count'))
@@ -134,9 +135,10 @@ class DashboardController extends Controller
         }
         $data['ArsaIlanCount'] = $resultArsa;
 
-        $KonutsData = Ilan::where('user_id', $id)
-            ->where('ilanable_type', Konut::class) // Konut modelini filtreliyoruz
-            ->join('konuts', 'ilans.ilanable_id', '=', 'konuts.id') // 'konuts' tablosuna join yapıyoruz
+        $KonutsData = Ilan::withTrashed()
+            ->where('user_id', $id)
+            ->where('ilanable_type', Konut::class) // Konut model is filtered
+            ->join('konuts', 'ilans.ilanable_id', '=', 'konuts.id') // Join 'konuts' table
             ->select('konuts.is_active', DB::raw('count(*) as count'))
             ->groupBy('konuts.is_active')
             ->get();
