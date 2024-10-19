@@ -47,36 +47,36 @@ class IsYeriController extends Controller
         $data = $request->all();
         $isYeri = new IsYeri([
             'ilan_basligi' => $data['ilan_basligi'],
-            'açıklama' => $data['açıklama'],
+            'açıklama' => $data['aciklama'],
             'teklif_tipi' => $data['teklif_tipi'],
-            'taşınmaz_türü' => $data['taşınmaz_türü'],
+            'taşınmaz_türü' => $data['tasinmaz_turu'],
             'fiyat' => $data['fiyat'],
             'm2' => $data['m2'],
-            'bölüm_oda_sayisi' => $data['bölüm_oda_sayisi'],
-            'açık_alan_m2' => $data['açık_alan_m2'],
-            'giriş_yüksekliği' => $data['giriş_yüksekliği'],
-            'kapalı_alan_m2' => $data['kapalı_alan_m2'],
+            'bölüm_oda_sayisi' => $data['bolum_oda_sayisi'],
+            'açık_alan_m2' => $data['acik_alan_m2'],
+            'giriş_yüksekliği' => $data['giriş_yuksekligi'],
+            'kapalı_alan_m2' => $data['kapali_alan_m2'],
             'oda_sayisi' => $data['oda_sayisi'],
-            'yapı_tipi' => $data['yapı_tipi'],
-            'yapı_durumu' => $data['yapı_durumu'],
+            'yapı_tipi' => $data['yapi_tipi'],
+            'yapı_durumu' => $data['yapi_durumu'],
             'kat_sayisi' => $data['kat_sayisi'],
-            'bina_yaşı' => $data['bina_yaşı'],
+            'bina_yaşı' => $data['bina_yasi'],
             'aidat' => $data['aidat'],
-            'ısıtma' => $data['ısıtma'],
-            'yapının_durumu' => $data['yapının_durumu'],
-            'alkol_ruhsatı' => $data['alkol_ruhsatı'],
-            'bulunduğu_kat' => $data['bulunduğu_kat'],
-            'asansör_sayisi' => $data['asansör_sayisi'],
-            'kiracılı' => $data['kiracılı'],
-            'krediye_uygunluk' => $data['krediye_uygunluk'],
-            'kullanım_durumu' => $data['kullanım_durumu'],
-            'zemin_etüdü' => $data['zemin_etüdü'],
+            'ısıtma' => $data['isitma'],
+            'yapının_durumu' => $data['yapinin_durumu'],
+            'alkol_ruhsatı' => $data['alkol_ruhsati'] ? 1 : 0,
+            'bulunduğu_kat' => $data['bulundugu_kat'],
+            'asansör_sayisi' => $data['asansor_sayisi'],
+            'kiracılı' => $data['kiracili']  ? 1 : 0,
+            'krediye_uygunluk' => $data['krediye_uygunluk'] ? 1 : 0,
+            'kullanım_durumu' => $data['kullanim_durumu'],
+            'zemin_etüdü' => $data['zemin_etudu'] ? 1 : 0,
             'tapu_durumu' => $data['tapu_durumu'],
-            'taşınmaz_numarası' => $data['taşınmaz_numarası'],
+            'taşınmaz_numarası' => $data['tasinmaz_numarasi'],
             'durumu' => $data['durumu'],
-            'takaslı' => $data['takaslı'],
-            'İl' => $data['İl'],
-            'İlçe' => $data['İlçe'],
+            'takaslı' => $data['takasli'] ? 1 : 0,
+            'İl' => $data['Il'],
+            'İlçe' => $data['Ilce'],
             'Mahalle' => $data['Mahalle'],
             'lat' => $data['lat'],
             'lng' => $data['lng'],
@@ -196,7 +196,12 @@ class IsYeriController extends Controller
     public function destroy(IsYeri $isYeri, $id)
     {
         $isYeri = IsYeri::find($id);
+        $isYeri->is_active = 0;
+        $isYeri->save();
         $isYeri->delete();
+
+        $Ilan = Ilan::where('ilanable_id', $id)->where('ilanable_type', IsYeri::class)->first();
+        $Ilan->delete();
 
         return response()->json([
             'message' => 'İlan Başarıyla Silindi'
