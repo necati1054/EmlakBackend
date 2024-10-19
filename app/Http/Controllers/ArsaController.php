@@ -46,7 +46,7 @@ class ArsaController extends Controller
         $data = $request->all();
         $arsa = new Arsa([
             'ilan_basligi' => $data['ilan_basligi'],
-            'açıklama' => $data['açıklama'],
+            'açıklama' => $data['aciklama'],
             'teklif_tipi' => $data['teklif_tipi'],
             'fiyat' => $data['fiyat'],
             'imar_durumu' => $data['imar_durumu'],
@@ -57,12 +57,12 @@ class ArsaController extends Controller
             'kaks' => $data['kaks'],
             'gabari' => $data['gabari'],
             'depozito' => $data['depozito'],
-            'krediye_uygunluk' => $data['krediye_uygunluk'],
+            'krediye_uygunluk' => $data['krediye_uygunluk'] ? 1 : 0,
             'tapu_durumu' => $data['tapu_durumu'],
-            'taşınmaz_numarası' => $data['taşınmaz_numarası'],
-            'takaslı' => $data['takaslı'],
-            'İl' => $data['İl'],
-            'İlçe' => $data['İlçe'],
+            'taşınmaz_numarası' => $data['tasınmaz_numarasi'],
+            'takaslı' => $data['takasli'] ? 1 : 0,
+            'İl' => $data['Il'],
+            'İlçe' => $data['Ilce'],
             'Mahalle' => $data['Mahalle'],
             'lat' => $data['lat'],
             'lng' => $data['lng'],
@@ -167,7 +167,12 @@ class ArsaController extends Controller
     public function destroy(Arsa $arsa, $id)
     {
         $isYeri = Arsa::find($id);
+        $isYeri->is_active = 0;
+        $isYeri->save();
         $isYeri->delete();
+
+        $Ilan = Ilan::where('ilanable_id', $id)->where('ilanable_type', Arsa::class)->first();
+        $Ilan->delete();
 
         return response()->json([
             'message' => 'İlan Başarıyla Silindi'
