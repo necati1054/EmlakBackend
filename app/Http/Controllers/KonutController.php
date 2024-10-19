@@ -179,7 +179,12 @@ class KonutController extends Controller
     public function destroy(Konut $konut, $id)
     {
         $konut = Konut::find($id);
+        $konut->is_active = 0;
+        $konut->save();
         $konut->delete();
+
+        $Ilan = Ilan::where('ilanable_id', $id)->where('ilanable_type', Konut::class)->first();
+        $Ilan->delete();
 
         return response()->json([
             'message' => 'İlan Başarıyla Silindi'
