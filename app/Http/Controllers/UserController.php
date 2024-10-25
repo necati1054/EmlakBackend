@@ -34,9 +34,6 @@ class userController extends Controller
         if ($request->name != null) {
             $user->name = $request->name;
         }
-        if ($request->password != null) {
-            $user->password = bcrypt($request->password);
-        }
         $user->save();
         return response()->json($user);
     }
