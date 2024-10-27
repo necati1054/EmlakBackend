@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\userController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArsaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KonutController;
@@ -29,12 +29,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //NOTE - AUTH ROUTES
 Route::post('login', [AuthController::class, 'login']);
-Route::post('logout', [authController::class, 'logout']);
-Route::post('register', [authController::class, 'register']);
-Route::post('reset-password', [authController::class, 'resetPassword']);
-Route::post('new-password/{token}', [authController::class, 'newPassword']);
-Route::post('user-update/{id}', [userController::class, 'userUpdate']);
-Route::post('user-password-update/{id}', [userController::class, 'userPasswordUpdate']); //FIXME - Neden kullanıldığına bak ve ileride düzelt
+Route::post('logout', [AuthController::class, 'logout']);
+Route::post('register', [AuthController::class, 'register']);
+Route::post('reset-password', [AuthController::class, 'resetPassword']);
+Route::post('new-password/{token}', [AuthController::class, 'newPassword']);
+Route::post('user-update/{id}', [UserController::class, 'userUpdate']);
+Route::post('user-password-update/{id}', [UserController::class, 'userPasswordUpdate']); //FIXME - Neden kullanıldığına bak ve ileride düzelt
 
 Route::get('user/{id}/ilans', [UserController::class, 'getUserIlans']);
 Route::get('/search', [SearchController::class, 'search']);
