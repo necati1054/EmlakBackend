@@ -58,4 +58,9 @@ class IsYeri extends Model
     {
         return $this->morphOne(Ilan::class, 'ilanable');
     }
+
+    public function firstPhoto()
+    {
+        return $this->morphOne(Photo::class, 'imageable')->orderBy('order', 'asc');
+    }
 }

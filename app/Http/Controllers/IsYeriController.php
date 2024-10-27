@@ -28,7 +28,9 @@ class IsYeriController extends Controller
 
     public function index()
     {
-        $data = IsYeri::all()->load('photos', 'ilan.user');
+        $data = IsYeri::orderBy('created_at', 'desc')
+            ->with('photos', 'ilan.user', 'firstPhoto')
+            ->get();
         return $data;
     }
 

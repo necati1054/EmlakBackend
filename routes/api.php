@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArsaController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\KonutController;
 use App\Http\Controllers\IsYeriController;
 use App\Http\Controllers\SearchController;
@@ -40,9 +41,9 @@ Route::get('user/{id}/ilans', [UserController::class, 'getUserIlans']);
 Route::get('/search', [SearchController::class, 'search']);
 
 //NOTE - IsYeri ROUTES
-Route::get('is_yeri', [IsYeriController::class, 'index']);
+Route::get('isyeri', [IsYeriController::class, 'index']);
 Route::post('is_yeri', [IsYeriController::class, 'store']);
-Route::get('is_yeri/{id}', [IsYeriController::class, 'show']);
+Route::get('isyeri/{id}', [IsYeriController::class, 'show']);
 Route::post('is_yeri/{id}', [IsYeriController::class, 'update']);
 Route::delete('is_yeri/{id}', [IsYeriController::class, 'destroy']);
 Route::put('is_yeri/{id}/ap', [IsYeriController::class, 'activePassive']);
@@ -72,3 +73,6 @@ Route::post('save-settings', [SettingController::class, 'store']);
 //NOTE - Dashboard ROUTES
 Route::get('admin-dashboard', [DashboardController::class, 'adminDashboard']);
 Route::get('user-dashboard/{id}', [DashboardController::class, 'userDashboard']);
+
+//NOTE - HomePageRoutes
+Route::get('home-page', [HomePageController::class, 'homePage']);

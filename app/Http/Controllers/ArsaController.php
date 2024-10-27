@@ -26,7 +26,9 @@ class ArsaController extends Controller
      */
     public function index()
     {
-        $data = Arsa::all()->load('photos', 'ilan.user');
+        $data = Arsa::orderBy('created_at', 'desc')
+            ->with('photos', 'ilan.user', 'firstPhoto')
+            ->get();
         return $data;
     }
 
