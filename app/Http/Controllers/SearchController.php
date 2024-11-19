@@ -13,7 +13,7 @@ class SearchController extends Controller
     public function search(Request $request)
     {
         //ENUM - (1 => Konut, 2 => IsYeri, 3 => Arsa)
-        $ilanType = $request->ilan_type;
+        $ilanType = $request->input("searchValues.ilan_type");
 
         $model = null;
         switch ($ilanType) {
@@ -31,111 +31,117 @@ class SearchController extends Controller
         }
 
         //ANCHOR - Ortak kolonlara göre filtreleme
-        if ($request->has('ilan_basligi')) {
-            $model->where('ilan_basligi', 'like', '%' . $request->input('ilan_basligi') . '%');
+        if ($request->has('searchValues.ilan_basligi')) {
+            $model->where('ilan_basligi', 'like', '%' . $request->input('searchValues.ilan_basligi') . '%');
         }
-        if ($request->has('fiyat_min')) {
-            $model->where('fiyat', '>=', $request->input('fiyat_min'));
+        if ($request->has('searchValues.fiyat_min')) {
+            $model->where('fiyat', '>=', $request->input('searchValues.fiyat_min'));
         }
-        if ($request->has('fiyat_max')) {
-            $model->where('fiyat', '<=', $request->input('fiyat_max'));
+        if ($request->has('searchValues.fiyat_max')) {
+            $model->where('fiyat', '<=', $request->input('searchValues.fiyat_max'));
         }
-        if ($request->has('created_at_min')) {
-            $model->where('created_at', '>=', $request->input('created_at_min'));
+        if ($request->has('searchValues.created_at_min')) {
+            $model->where('created_at', '>=', $request->input('searchValues.created_at_min'));
         }
-        if ($request->has('created_at_max')) {
-            $model->where('created_at', '<=', $request->input('created_at_max'));
+        if ($request->has('searchValues.created_at_max')) {
+            $model->where('created_at', '<=', $request->input('searchValues.created_at_max'));
         }
-        if ($request->has('teklif_tipi')) {
-            $model->where('teklif_tipi', $request->input('teklif_tipi'));
+        if ($request->has('searchValues.teklif_tipi')) {
+            $model->where('teklif_tipi', $request->input('searchValues.teklif_tipi'));
         }
-        if ($request->has('krediye_uygun')) {
-            $model->where('krediye_uygun', $request->input('krediye_uygun'));
+        if ($request->has('searchValues.krediye_uygun')) {
+            $model->where('krediye_uygun', $request->input('searchValues.krediye_uygun'));
         }
-        if ($request->has('krediye_uygunluk')) {
-            $model->where('krediye_uygunluk', $request->input('krediye_uygunluk'));
+        if ($request->has('searchValues.krediye_uygunluk')) {
+            $model->where('krediye_uygunluk', $request->input('searchValues.krediye_uygunluk'));
         }
-        if ($request->has('tapu_durumu')) {
-            $model->where('tapu_durumu', $request->input('tapu_durumu'));
+        if ($request->has('searchValues.tapu_durumu')) {
+            $model->where('tapu_durumu', $request->input('searchValues.tapu_durumu'));
         }
-        if ($request->has('taşınmaz_numarası')) {
-            $model->where('taşınmaz_numarası', $request->input('taşınmaz_numarası'));
+        if ($request->has('searchValues.taşınmaz_numarası')) {
+            $model->where('taşınmaz_numarası', $request->input('searchValues.taşınmaz_numarası'));
         }
-        if ($request->has('takaslı')) {
-            $model->where('takaslı', $request->input('takaslı'));
+        if ($request->has('searchValues.takaslı')) {
+            $model->where('takaslı', $request->input('searchValues.takaslı'));
         }
-        if ($request->has('il')) {
-            $model->where('il', $request->input('il'));
+        if ($request->has('searchValues.il')) {
+            $model->where('İl', $request->input('searchValues.il'));
         }
-        if ($request->has('ilçe')) {
-            $model->where('ilçe', $request->input('ilçe'));
+        if ($request->has('searchValues.ilçe')) {
+            $model->where('İlçe', $request->input('searchValues.ilçe'));
         }
-        if ($request->has('mahalle')) {
-            $model->where('mahalle', $request->input('mahalle'));
+        if ($request->has('searchValues.mahalle')) {
+            $model->where('Mahalle', $request->input('searchValues.mahalle'));
         }
-        if ($request->has('lat')) {
-            $model->where('lat', $request->input('lat'));
+        if ($request->has('searchValues.lat')) {
+            $model->where('lat', $request->input('searchValues.lat'));
         }
-        if ($request->has('lng')) {
-            $model->where('lng', $request->input('lng'));
+        if ($request->has('searchValues.lng')) {
+            $model->where('lng', $request->input('searchValues.lng'));
         }
 
         // İlan tipine özgü filtreleme
         switch ($ilanType) {
             case 1: // Konut
-                if ($request->has('oda_sayisi')) {
-                    $model->where('oda_sayisi', $request->input('oda_sayisi'));
+                if ($request->has('searchValues.oda_sayisi')) {
+                    $model->where('oda_sayisi', $request->input('searchValues.oda_sayisi'));
                 }
-                if ($request->has('bina_yaşı')) {
-                    $model->where('bina_yaşı', '<=', $request->input('bina_yaşı'));
+                if ($request->has('searchValues.bina_yaşı')) {
+                    $model->where('bina_yaşı', '<=', $request->input('searchValues.bina_yaşı'));
+                }
+                if ($request->has('searchValues.taşınmaz_türü')) {
+                    $model->where('taşınmaz_türü', $request->input('searchValues.taşınmaz_türü'));
                 }
                 break;
 
             case 2: // IsYeri
-                if ($request->has('kat_sayisi')) {
-                    $model->where('kat_sayisi', '>=', $request->input('kat_sayisi'));
+                if ($request->has('searchValues.kat_sayisi')) {
+                    $model->where('kat_sayisi', '>=', $request->input('searchValues.kat_sayisi'));
                 }
-                if ($request->has('asansör_sayisi')) {
-                    $model->where('asansör_sayisi', '>=', $request->input('asansör_sayisi'));
+                if ($request->has('searchValues.asansör_sayisi')) {
+                    $model->where('asansör_sayisi', '>=', $request->input('searchValues.asansör_sayisi'));
+                }
+                if ($request->has('searchValues.taşınmaz_türü')) {
+                    $model->where('taşınmaz_türü', $request->input('searchValues.taşınmaz_türü'));
                 }
                 break;
 
             case 3: // Arsa
-                if ($request->has('m2_min')) {
-                    $model->where('m2', '>=', $request->input('m2_min'));
+                if ($request->has('searchValues.m2_min')) {
+                    $model->where('m2', '>=', $request->input('searchValues.m2_min'));
                 }
-                if ($request->has('m2_max')) {
-                    $model->where('m2', '<=', $request->input('m2_max'));
+                if ($request->has('searchValues.m2_max')) {
+                    $model->where('m2', '<=', $request->input('searchValues.m2_max'));
                 }
-                if ($request->has('imar_durumu')) {
-                    $model->where('imar_durumu', $request->input('imar_durumu'));
+                if ($request->has('searchValues.imar_durumu')) {
+                    $model->where('imar_durumu', $request->input('searchValues.imar_durumu'));
                 }
-                if ($request->has('ada_no')) {
-                    $model->where('ada_no', $request->input('ada_no'));
+                if ($request->has('searchValues.ada_no')) {
+                    $model->where('ada_no', $request->input('searchValues.ada_no'));
                 }
-                if ($request->has('parsel_no')) {
-                    $model->where('parsel_no', $request->input('parsel_no'));
+                if ($request->has('searchValues.parsel_no')) {
+                    $model->where('parsel_no', $request->input('searchValues.parsel_no'));
                 }
-                if ($request->has('pafta_no')) {
-                    $model->where('pafta_no', $request->input('pafta_no'));
+                if ($request->has('searchValues.pafta_no')) {
+                    $model->where('pafta_no', $request->input('searchValues.pafta_no'));
                 }
-                if ($request->has('kaks')) {
-                    $model->where('kaks', $request->input('kaks'));
+                if ($request->has('searchValues.kaks')) {
+                    $model->where('kaks', $request->input('searchValues.kaks'));
                 }
-                if ($request->has('gabari')) {
-                    $model->where('gabari', $request->input('gabari'));
+                if ($request->has('searchValues.gabari')) {
+                    $model->where('gabari', $request->input('searchValues.gabari'));
                 }
-                if ($request->has('depozito_min')) {
-                    $model->where('depozito', '>=', $request->input('depozito_min'));
+                if ($request->has('searchValues.depozito_min')) {
+                    $model->where('depozito', '>=', $request->input('searchValues.depozito_min'));
                 }
-                if ($request->has('depozito_max')) {
-                    $model->where('depozito', '<=', $request->input('depozito_max'));
+                if ($request->has('searchValues.depozito_max')) {
+                    $model->where('depozito', '<=', $request->input('searchValues.depozito_max'));
                 }
                 break;
         }
 
         // Photos ilişkisini yükle ve sonuçları döndür
-        $results = $model->with('photos')->get();
+        $results = $model->with('photos', "firstPhoto", "ilan")->get();
 
         return response()->json($results);
     }

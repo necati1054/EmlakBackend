@@ -38,7 +38,7 @@ Route::post('user-update/{id}', [UserController::class, 'userUpdate']);
 Route::post('user-password-update/{id}', [UserController::class, 'userPasswordUpdate']); //FIXME - Neden kullanıldığına bak ve ileride düzelt
 
 Route::get('user/{id}/ilans', [UserController::class, 'getUserIlans']);
-Route::get('/search', [SearchController::class, 'search']);
+Route::post('/search', [SearchController::class, 'search']);
 
 //NOTE - IsYeri ROUTES
 Route::get('isyeri', [IsYeriController::class, 'index']);
