@@ -15,9 +15,9 @@ class HomePageController extends Controller
      */
     public function homePage()
     {
-        $DataKonut = Konut::orderBy('created_at', 'desc')->take(4)->get()->load('firstPhoto');
-        $DataIsyeri = IsYeri::orderBy('created_at', 'desc')->take(4)->get()->load('firstPhoto');;
-        $DataArsa = Arsa::orderBy('created_at', 'desc')->take(4)->get()->load('firstPhoto');;
+        $DataKonut = Konut::orderBy('created_at', 'desc')->where("is_active", "1")->take(4)->get()->load('firstPhoto');
+        $DataIsyeri = IsYeri::orderBy('created_at', 'desc')->where("is_active", "1")->take(4)->get()->load('firstPhoto');;
+        $DataArsa = Arsa::orderBy('created_at', 'desc')->where("is_active", "1")->take(4)->get()->load('firstPhoto');;
 
         return response()->json([
             'konut' => $DataKonut,

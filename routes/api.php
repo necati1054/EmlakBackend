@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArsaController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\KonutController;
 use App\Http\Controllers\IsYeriController;
@@ -76,3 +77,8 @@ Route::get('user-dashboard/{id}', [DashboardController::class, 'userDashboard'])
 
 //NOTE - HomePageRoutes
 Route::get('home-page', [HomePageController::class, 'homePage']);
+
+//NOTE - Sıkça Sorulan Sorular
+Route::get('faq', [FaqController::class, "index"]);
+Route::post('faq', [FaqController::class, "store"]);
+// Route::post('save-faq/{id}', [FaqController::class, "store"]);

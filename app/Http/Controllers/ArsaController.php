@@ -26,7 +26,7 @@ class ArsaController extends Controller
      */
     public function index()
     {
-        $data = Arsa::orderBy('created_at', 'desc')
+        $data = Arsa::orderBy('created_at', 'desc')->where("is_active", "1")
             ->with('photos', 'ilan.user', 'firstPhoto')
             ->get();
         return $data;

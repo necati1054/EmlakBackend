@@ -28,7 +28,7 @@ class IsYeriController extends Controller
 
     public function index()
     {
-        $data = IsYeri::orderBy('created_at', 'desc')
+        $data = IsYeri::orderBy('created_at', 'desc')->where("is_active", "1")
             ->with('photos', 'ilan.user', 'firstPhoto')
             ->get();
         return $data;

@@ -15,7 +15,7 @@ class KonutController extends Controller
      */
     public function index()
     {
-        $data = Konut::orderBy('created_at', 'desc')
+        $data = Konut::orderBy('created_at', 'desc')->where("is_active", "1")
             ->with('photos', 'ilan.user', 'firstPhoto')
             ->get();
         return $data;
