@@ -65,10 +65,10 @@ class ArsaController extends Controller
             'kaks' => $data['kaks'],
             'gabari' => $data['gabari'],
             'depozito' => $data['depozito'],
-            'krediye_uygunluk' => $data['krediye_uygunluk'] ? 1 : 0,
+            'krediye_uygunluk' => $data['krediye_uygunluk'] == "true" ? 1 : 0,
             'tapu_durumu' => $data['tapu_durumu'],
             'taşınmaz_numarası' => $data['tasınmaz_numarasi'],
-            'takaslı' => $data['takasli'] ? 1 : 0,
+            'takaslı' => $data['takasli'] == "true" ? 1 : 0,
             'İl' => $data['Il'],
             'İlçe' => $data['Ilce'],
             'Mahalle' => $data['Mahalle'],
@@ -140,9 +140,10 @@ class ArsaController extends Controller
     {
         $data = $request->all();
         $arsa = Arsa::find($id);
+
         $arsa->update([
             'ilan_basligi' => $data['ilan_basligi'],
-            'açıklama' => $data['açıklama'],
+            'açıklama' => $data['aciklama'],
             'teklif_tipi' => $data['teklif_tipi'],
             'fiyat' => $data['fiyat'],
             'imar_durumu' => $data['imar_durumu'],
@@ -153,12 +154,12 @@ class ArsaController extends Controller
             'kaks' => $data['kaks'],
             'gabari' => $data['gabari'],
             'depozito' => $data['depozito'],
-            'krediye_uygunluk' => $data['krediye_uygunluk'],
+            'krediye_uygunluk' => $data['krediye_uygunluk'] == "true" ? 1 : 0,
             'tapu_durumu' => $data['tapu_durumu'],
-            'taşınmaz_numarası' => $data['taşınmaz_numarası'],
-            'takaslı' => $data['takaslı'],
-            'İl' => $data['İl'],
-            'İlçe' => $data['İlçe'],
+            'taşınmaz_numarası' => $data['tasınmaz_numarasi'],
+            'takaslı' => $data['takasli'] == "true" ? 1 : 0,
+            'İl' => $data['Il'],
+            'İlçe' => $data['Ilce'],
             'Mahalle' => $data['Mahalle'],
             'lat' => $data['lat'],
             'lng' => $data['lng'],

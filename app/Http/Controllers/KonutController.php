@@ -179,6 +179,10 @@ class KonutController extends Controller
             'lat' => $data['lat'],
             'lng' => $data['lng'],
         ]);
+
+        return response()->json([
+            'message' => 'İlan Başarıyla Güncellendi'
+        ], 201);
     }
 
     /**
